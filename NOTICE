@@ -1,0 +1,14 @@
+Baseline: CitrusScholar d275430d3ef01bf9558ccd85204d1bdede631989.
+Reused with the repository's MIT license (see LICENSE).
+
+packages/citrus_refcheck supplies inventory, parsing, providers, comparisons,
+transport, legacy persistence/export, and verdict projection. Its registry
+mappings retain provenance to QAagent 494b7dd068e7aec3d3dfa9b309b180d0354801f7.
+The synthetic verdict fixture corpus and evaluation retain their baseline
+assertions. The bounded scheduling pattern comes from
+01_src/src/research/reference_audit.py at the same CitrusScholar baseline.
+
+This extraction adds one-shot identity verification, injected host callbacks,
+a standalone CLI transport mode, and projections of persisted results.
+Third-party Python dependencies keep their own terms. PyMuPDF is distributed
+under AGPL or a commercial license. The repository contains no dependency wheels.
