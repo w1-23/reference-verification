@@ -13,7 +13,7 @@ python -m venv .venv
 .venv/bin/python -m pytest
 ```
 
-The distribution is `reference-verification` and the import remains `citrus_refcheck`. Install it in an environment where it owns that import. See the [migration table](references/migration.md) for compatibility with hosts that currently install the support bundle.
+The distribution is `reference-verification` and the import remains `citrus_refcheck`. Install it in an environment where it owns that import. See the [migration table](CAPABILITY_MIGRATION.md) for compatibility with hosts that currently install the support bundle.
 
 ## CLI
 
