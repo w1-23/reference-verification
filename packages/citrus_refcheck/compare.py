@@ -116,3 +116,27 @@ def compare_fields(claims, candidate, *, uncertain_fields=()):
 
 def hint_differences(claims, record, *, uncertain_fields=()):
     return [{"field": field, "submitted": row["submitted"], "registered": row["registered"], "kind": row["status"], "reason": row["reason"], "input_certainty": row["input_certainty"]} for field,row in compare_fields(claims,record,uncertain_fields=uncertain_fields).items()]
+
+def identity_sufficient(claims, candidate):
+    """True when registry metadata is enough to stop further identity lookup.
+
+    Exact DOI agreement is sufficient.  Without a usable DOI, require an exact
+    normalized title and reject conflicting year/author evidence.  Benign
+    online/print year differences and abbreviated authors stay insufficient
+    only when they are explicitly conflicting.
+    """
+    if not isinstance(claims, dict) or not isinstance(candidate, dict):
+        return False
+    supplied_doi = lit.normalize_doi(claims.get('doi'))
+    registered_doi = lit.normalize_doi(candidate.get('doi'))
+    fields = compare_fields(claims, candidate)
+    if supplied_doi and registered_doi:
+        # A resolvable DOI is not enough: it must identify the same title.
+        return supplied_doi == registered_doi and fields['title']['status'] != 'conflicting'
+    if fields['title']['status'] != 'matched':
+        return False
+    if fields['year']['status'] == 'conflicting':
+        return False
+    if fields['authors']['status'] == 'conflicting':
+        return False
+    return True

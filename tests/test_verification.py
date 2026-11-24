@@ -14,7 +14,7 @@ import pymupdf
 import pytest
 
 from citrus_refcheck import (AuditStopped, BatchLimits, BudgetExceeded, Capabilities, Observation,
-                             export_snapshot, extract_inventory, verify_batch)
+                             export_snapshot, extract_inventory, identity_sufficient, verify_batch)
 from citrus_refcheck.standalone import registry_capabilities
 
 
@@ -299,3 +299,32 @@ def test_export_command_uses_no_clobber_snapshot_output(tmp_path, capsys):
     assert json.loads(capsys.readouterr().out)['errors'][0]['code'] == 'output_exists'
     assert destination.read_bytes() == source.read_bytes()
     assert set(tmp_path.iterdir()) == {source, destination}
+
+def test_on_row_reports_each_entry_before_the_batch_returns():
+    entries = [_entry('a'), _entry('b'), _entry('missing')]
+    inventory = extract_inventory(references=entries)
+    seen = []
+
+    def lookup(query, deadline):
+        name = query.value.split('/')[1]
+        if name == 'missing':
+            return Observation('Fixture registry', 404)
+        return Observation('Fixture registry', 200, (_work(name),))
+
+    snapshot = verify_batch(inventory, capabilities=Capabilities(_noop, _noop, lookup_doi=lookup),
+                            on_row=lambda row: seen.append((row['record_id'], row['evidence']['processing_status'])))
+    assert len(seen) == len(entries)
+    assert {row['record_id'] for row in snapshot['entries']} == {record_id for record_id, _ in seen}
+    assert all(status == 'processed' for _, status in seen)
+
+
+def test_identity_sufficient_accepts_doi_and_exact_title_but_rejects_conflicts():
+    claims = {'title': 'Synthetic work a', 'doi': '10.1234/a', 'authors': 'Alice Example'}
+    assert identity_sufficient(claims, _work('a'))
+    assert not identity_sufficient(claims, _work('b'))
+    assert not identity_sufficient({**claims, 'title': 'Unrelated work'}, _work('a'))
+    work = {**_work('a'), 'year': '2024'}
+    title_only = {'title': 'Synthetic work a', 'authors': 'Alice Example', 'year': '2024'}
+    assert identity_sufficient(title_only, work)
+    assert not identity_sufficient({**title_only, 'year': '1999'}, work)
+    assert not identity_sufficient({**title_only, 'title': 'Unrelated'}, work)
