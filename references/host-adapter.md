@@ -14,6 +14,43 @@ Translate existing host capabilities into the small Python boundary below. Const
 
 `entries[].evidence.processing_status` records whether an observation was received. `match_status` is `matching`, `conflict`, `unconfirmed`, or `unprocessed`. The `reason` distinguishes `rate_limited`, `not_found`, `provider_error`, missing metadata, and work skipped before an accepted observation. `not_found` describes the queried source. Keep extraction coverage (`inventory.extraction`) distinct from batch processing coverage. `all_entries_processed` describes the inventory returned by extraction.
 
+### First-return report view
+
+Call `citrus_refcheck.report_view(saved_snapshot)` and give the model that projection, not a fresh lookup and not the full per-row source receipts. It is offline and never mutates the snapshot. The stable shape is:
+
+```json
+{
+  "schema_version": "reference-verification-report/1",
+  "source_schema_version": "reference-verification/1",
+  "batch_finished": true,
+  "snapshot_only": true,
+  "report_ready": true,
+  "coverage_complete": true,
+  "batch_processing_status": "complete",
+  "stop_reason": "",
+  "coverage": {"requested": 10, "actual": 10, "gap": 0},
+  "unprocessed_ordinals": [],
+  "additional_checks_require_user_request": true,
+  "rows": [{
+    "record_id": "opaque-stable-id",
+    "record_index": 0,
+    "ordinal": 1,
+    "citation": "short original citation",
+    "processing_status": "processed",
+    "identity": "matched",
+    "reason": "identifier_match",
+    "match": {"title": "...", "doi": "...", "source": "..."},
+    "field_notes": []
+  }]
+}
+```
+
+`rows` always preserve submitted order and duplicate rows. `processing_status` is `processed` or `unprocessed`; `identity` is `matched`, `conflict`, `unresolved`, or `unprocessed`. `field_notes` entries retain `field`, `submitted`, `registered`, `source`, and `reason`. They are notes, not an automatic correction demand. The compact projection intentionally omits abstracts, full text, and raw provider payloads.
+
+`report_ready` means the current snapshot can be shown: either every entry was processed, or the batch has a terminal partial/cancelled result with an explicit stop reason or per-row reason. `coverage_complete` is stricter and is true only when `all_entries_processed` is true. A `complete` batch may still contain `unresolved` rows; that is a valid report. An `unprocessed` row is a coverage gap, never a negative identity finding.
+
+After the batch returns, `snapshot_only` and `additional_checks_require_user_request` are always true. Do not automatically Search/Fetch, resume, read full text, replace a DOI, or rebuild the audit from the final answer. A pure identity request ends at this report. A mixed request closes only this subtask. Render extra rows or XLSX/RIS/BibTeX from the same saved snapshot. The CLI equivalents are `report-view` and `export-snapshot`.
+
 ## CitrusScholar integration notes
 
 Bind the host network switch and cancellation to `check`, the global metering and authorization to `debit`, and the existing authorized Search and bibliographic routes to callbacks. Use host-managed receipts and source records to fill `evidence_refs` and `source_ref`. Refer to the actual source in the report. Map the snapshot to the host's generic completion and artifact APIs. `complete` with `unconfirmed` rows is a valid delivered report. Save and render partial snapshots after a stop. Host integration requires wiring and testing authorized Search output, shared budget and throttle, citation receipts, artifact publication, and the final runtime installation lock. These mappings remain outside the package.

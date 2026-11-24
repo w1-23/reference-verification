@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0
+
+- Added `report_view(snapshot)`, an offline compact projection with separate processing and identity axes, preservation of original order and citation IDs, explicit necessary-difference notes, and a snapshot-only stop contract.
+- Markdown reports now use the same projection, so saved-report rendering and first-return host rows cannot diverge.
+- Added `report-view` CLI rendering from a saved snapshot without lookups, plus complete and partial replay fixtures.
+
 ## 1.1.0
 
 - Bounded batch waiting: `verify_batch` now waits with a deadline and discards late futures instead of blocking on an unresponsive callback.
