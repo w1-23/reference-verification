@@ -6,6 +6,7 @@ from tempfile import NamedTemporaryFile
 
 from .audit import export_snapshot
 from .inventory import extract_inventory
+from .report import report_view
 from .standalone import registry_capabilities
 from .verification import BatchLimits, verify_batch
 
@@ -32,6 +33,11 @@ def add_verification_commands(subparsers):
     render.add_argument('--format', choices=['json', 'xlsx', 'ris', 'bibtex', 'markdown'], required=True)
     render.add_argument('--output', type=Path, required=True)
     render.set_defaults(handler=_export)
+
+    view = subparsers.add_parser('report-view', help='Render the compact report from a saved snapshot offline')
+    view.add_argument('snapshot', type=Path)
+    view.add_argument('--output', type=Path)
+    view.set_defaults(handler=_report_view)
 
 
 def _load_inventory(args):
@@ -76,3 +82,13 @@ def _export(args):
     snapshot = json.loads(args.snapshot.read_bytes())
     _save(args.output, export_snapshot(snapshot, format=args.format))
     return {'status': 'saved', 'output': str(args.output), 'coverage': snapshot['coverage']}
+
+
+def _report_view(args):
+    snapshot = json.loads(args.snapshot.read_bytes())
+    result = report_view(snapshot)
+    if args.output:
+        if args.output.exists():
+            raise FileExistsError(args.output)
+        _save(args.output, json.dumps(result, ensure_ascii=False, allow_nan=False).encode('utf-8'))
+    return result

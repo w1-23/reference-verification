@@ -10,7 +10,7 @@ Baseline `d275430d3ef01bf9558ccd85204d1bdede631989`.
 | Bounded batch completion | `verify_batch` waits with the remaining deadline, cancels its own workers, and drops late futures unless `on_row` already persisted their row. |
 | Provider chains and optional resume | New entry runs one identifier or title route. Additional checking is an explicit host/user operation. |
 | `LookupLimits`, `lookup_evidence`, `AuditRepository`, legacy CLI | Retained for compatibility. Existing standalone SQLite audits can still use old `snapshot` and `export`. The Skill path uses in-memory batches and explicit snapshot storage. |
-| Host reference audit JSON/XLSX/RIS/BibTeX and report UI | `reference-verification/1` snapshot has every inventory row and its processing/match outcome. XLSX columns and JSON shape are versioned independently from the old server API. RIS/BibTeX remain lossy projections of submitted claims. Markdown is available for direct reporting. |
+| Host reference audit JSON/XLSX/RIS/BibTeX and report UI | `reference-verification/1` snapshot has every inventory row and its processing/match outcome. `report_view` is the single offline compact projection for first return and Markdown; it keeps processing and identity separate and marks the result snapshot-only. XLSX columns and JSON shape are versioned independently from the old server API. RIS/BibTeX remain lossy projections of submitted claims. |
 | Host private state, authorization, Search, and artifacts | Supply capabilities using [the adapter contract](references/host-adapter.md). Host interprets completion and delivers artifacts. |
 
 ## Host capability mapping

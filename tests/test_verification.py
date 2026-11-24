@@ -3,6 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from contextvars import ContextVar
 from io import BytesIO
 import json
+from pathlib import Path
 from threading import Barrier, Event, Lock
 import time
 from unittest.mock import patch
@@ -14,7 +15,7 @@ import pymupdf
 import pytest
 
 from citrus_refcheck import (AuditStopped, BatchLimits, BudgetExceeded, Capabilities, Observation,
-                             export_snapshot, extract_inventory, identity_sufficient, verify_batch)
+                             export_snapshot, extract_inventory, identity_sufficient, report_view, verify_batch)
 from citrus_refcheck.standalone import registry_capabilities
 
 
@@ -94,6 +95,12 @@ def test_ten_entries_first_return_with_three_throttles_and_real_overlap():
     assert 3 <= peak <= 4
     assert len(calls) == 9 and Counter(calls) == Counter(reservations) and len(set(calls)) == 9
     assert snapshot['budget']['dispatched'] == 9
+    view = report_view(snapshot)
+    assert view['report_ready'] and view['coverage_complete']
+    assert len(view['rows']) == 10 and [row['ordinal'] for row in view['rows']] == list(range(1, 11))
+    assert [row['identity'] for row in view['rows']].count('unresolved') == 5
+    assert all(row['match']['source'] for row in view['rows'] if row['identity'] == 'matched')
+    assert len(calls) == 9
 
 
 def test_unprocessed_rate_cooldown_and_no_fallback():
@@ -328,3 +335,67 @@ def test_identity_sufficient_accepts_doi_and_exact_title_but_rejects_conflicts()
     assert identity_sufficient(title_only, work)
     assert not identity_sufficient({**title_only, 'year': '1999'}, work)
     assert not identity_sufficient({**title_only, 'title': 'Unrelated'}, work)
+
+
+_FIXTURES = Path(__file__).parent / 'fixtures'
+
+
+def _fixture(name):
+    return json.loads((_FIXTURES / name).read_text(encoding='utf-8'))
+
+
+def test_complete_batch_replay_has_compact_report_without_new_work():
+    snapshot = _fixture('report_complete_batch.json')
+    before = json.dumps(snapshot, ensure_ascii=False, sort_keys=True)
+    with patch('socket.socket', side_effect=AssertionError('network')):
+        view = report_view(snapshot)
+        markdown = export_snapshot(snapshot, format='markdown').decode()
+    assert json.dumps(snapshot, ensure_ascii=False, sort_keys=True) == before
+    assert view['schema_version'] == 'reference-verification-report/1'
+    assert view['batch_finished'] and view['snapshot_only']
+    assert view['report_ready'] and view['coverage_complete']
+    assert view['additional_checks_require_user_request']
+    assert view['coverage'] == {'requested': 4, 'actual': 4, 'gap': 0}
+    assert [row['ordinal'] for row in view['rows']] == [1, 2, 3, 4]
+    assert [row['identity'] for row in view['rows']] == ['matched', 'conflict', 'unresolved', 'unresolved']
+    assert all(row['processing_status'] == 'processed' for row in view['rows'])
+    assert view['rows'][0]['match']['source'] == 'Fixture registry'
+    conflict = view['rows'][1]['field_notes'][0]
+    assert conflict['field'] == 'title' and conflict['submitted'] and conflict['registered']
+    assert conflict['source'] == 'Fixture registry'
+    assert all('abstract' not in (row['match'] or {}) for row in view['rows'])
+    assert '| # | Original citation | Identity | Matched work / source | Necessary differences |' in markdown
+    assert 'identifier_title_conflict' in markdown and 'not_found' in markdown
+
+
+def test_partial_batch_replay_is_reportable_but_not_complete():
+    snapshot = _fixture('report_partial_batch.json')
+    with patch('socket.socket', side_effect=AssertionError('network')):
+        view = report_view(snapshot)
+    assert view['batch_finished'] and view['snapshot_only']
+    assert view['report_ready'] is True
+    assert view['coverage_complete'] is False
+    assert view['batch_processing_status'] == 'partial'
+    assert view['coverage'] == {'requested': 3, 'actual': 2, 'gap': 1}
+    assert view['unprocessed_ordinals'] == [3]
+    assert [(row['processing_status'], row['identity'], row['reason']) for row in view['rows']] == [
+        ('processed', 'matched', 'identifier_match'),
+        ('processed', 'unresolved', 'rate_limited'),
+        ('unprocessed', 'unprocessed', 'rate_limit_cooldown'),
+    ]
+    assert view['additional_checks_require_user_request'] is True
+
+
+def test_report_view_and_snapshot_export_share_saved_identity_snapshot(tmp_path, capsys):
+    from citrus_refcheck.cli import main
+
+    source = _FIXTURES / 'report_partial_batch.json'
+    output = tmp_path / 'report-view.json'
+    with patch('socket.socket', side_effect=AssertionError('network')):
+        assert main(['report-view', str(source), '--output', str(output)]) == 0
+    printed = json.loads(capsys.readouterr().out)
+    saved = json.loads(output.read_text(encoding='utf-8'))
+    assert printed == saved
+    assert saved['coverage_complete'] is False and saved['unprocessed_ordinals'] == [3]
+    assert set(saved['rows'][0]) == {'record_id', 'record_index', 'ordinal', 'citation', 'processing_status',
+                                     'identity', 'reason', 'match', 'field_notes'}

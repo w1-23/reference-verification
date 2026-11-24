@@ -1,0 +1,349 @@
+{
+  "schema_version": "reference-verification/1",
+  "inventory": {
+    "source": {
+      "name": "references.txt",
+      "sha256": "593941444bdae06e02c0d128b165ea80df7072647e906fe0a1f4c6df7a2600e1",
+      "version": "593941444bdae06e02c0d128b165ea80df7072647e906fe0a1f4c6df7a2600e1",
+      "ref": {}
+    },
+    "parser_version": "bibliography-fallback/3",
+    "extraction": {
+      "status": "complete",
+      "scope": "supplied_records",
+      "limitations": [],
+      "records": 4
+    },
+    "entries": [
+      {
+        "citation": "[match] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work match",
+          "doi": "10.1234/match",
+          "authors": "Alice Example"
+        },
+        "original": {
+          "citation": "[match] Original synthetic citation",
+          "claims": {
+            "title": "Synthetic work match",
+            "doi": "10.1234/match",
+            "authors": "Alice Example"
+          }
+        },
+        "positions": [
+          {
+            "record_index": 0
+          }
+        ],
+        "parse_status": "supplied",
+        "uncertain_fields": [],
+        "record_index": 0,
+        "record_id": "2e08e6dafba1bcebf5de0264afa9f0a8286be14dd65f04ac599ea0aa930d7355",
+        "claims_sha256": "1f3eff93f1ef263f2d8863a5f120939b5405e20db6a23a5437b9b5a970716984",
+        "source_sha256": "593941444bdae06e02c0d128b165ea80df7072647e906fe0a1f4c6df7a2600e1",
+        "parser_version": "bibliography-fallback/3"
+      },
+      {
+        "citation": "[title-conflict] Original synthetic citation",
+        "claims": {
+          "title": "Unrelated submitted title",
+          "doi": "10.1234/title-conflict",
+          "authors": "Alice Example"
+        },
+        "original": {
+          "citation": "[title-conflict] Original synthetic citation",
+          "claims": {
+            "title": "Unrelated submitted title",
+            "doi": "10.1234/title-conflict",
+            "authors": "Alice Example"
+          }
+        },
+        "positions": [
+          {
+            "record_index": 1
+          }
+        ],
+        "parse_status": "supplied",
+        "uncertain_fields": [],
+        "record_index": 1,
+        "record_id": "5444c506627e9034eea34409e6364c89ac9f9590aaa4f388f95a585eb6d22f03",
+        "claims_sha256": "15f7432d25bb81c039c1e1014a0569fde37008e7aef4b0ba1ab195f290190649",
+        "source_sha256": "593941444bdae06e02c0d128b165ea80df7072647e906fe0a1f4c6df7a2600e1",
+        "parser_version": "bibliography-fallback/3"
+      },
+      {
+        "citation": "[no-match] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work no-match",
+          "doi": "",
+          "authors": "Alice Example"
+        },
+        "original": {
+          "citation": "[no-match] Original synthetic citation",
+          "claims": {
+            "title": "Synthetic work no-match",
+            "doi": "",
+            "authors": "Alice Example"
+          }
+        },
+        "positions": [
+          {
+            "record_index": 2
+          }
+        ],
+        "parse_status": "supplied",
+        "uncertain_fields": [],
+        "record_index": 2,
+        "record_id": "2925ecbab0b2ea38ffa2f7ad3b761b9ccaf35c3dd72abc91af8f208a2865f8d6",
+        "claims_sha256": "8f7bdfda009e5bc83917c65adcc1f680f79fcf410ecd711818740922727334c4",
+        "source_sha256": "593941444bdae06e02c0d128b165ea80df7072647e906fe0a1f4c6df7a2600e1",
+        "parser_version": "bibliography-fallback/3"
+      },
+      {
+        "citation": "[missing] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work missing",
+          "doi": "10.1234/missing",
+          "authors": "Alice Example"
+        },
+        "original": {
+          "citation": "[missing] Original synthetic citation",
+          "claims": {
+            "title": "Synthetic work missing",
+            "doi": "10.1234/missing",
+            "authors": "Alice Example"
+          }
+        },
+        "positions": [
+          {
+            "record_index": 3
+          }
+        ],
+        "parse_status": "supplied",
+        "uncertain_fields": [],
+        "record_index": 3,
+        "record_id": "0753144a0011bbef7a06810865e7ce4b1ca1d92b2ecd86fda8517ff45f19366c",
+        "claims_sha256": "7d89f449eef76d17e01f5a456a8af31f3ccb7a880b02c88016a62ec3908ae216",
+        "source_sha256": "593941444bdae06e02c0d128b165ea80df7072647e906fe0a1f4c6df7a2600e1",
+        "parser_version": "bibliography-fallback/3"
+      }
+    ]
+  },
+  "entries": [
+    {
+      "citation": "[match] Original synthetic citation",
+      "claims": {
+        "title": "Synthetic work match",
+        "doi": "10.1234/match",
+        "authors": "Alice Example"
+      },
+      "original": {
+        "citation": "[match] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work match",
+          "doi": "10.1234/match",
+          "authors": "Alice Example"
+        }
+      },
+      "positions": [
+        {
+          "record_index": 0
+        }
+      ],
+      "parse_status": "supplied",
+      "uncertain_fields": [],
+      "record_index": 0,
+      "record_id": "2e08e6dafba1bcebf5de0264afa9f0a8286be14dd65f04ac599ea0aa930d7355",
+      "claims_sha256": "1f3eff93f1ef263f2d8863a5f120939b5405e20db6a23a5437b9b5a970716984",
+      "source_sha256": "593941444bdae06e02c0d128b165ea80df7072647e906fe0a1f4c6df7a2600e1",
+      "parser_version": "bibliography-fallback/3",
+      "evidence": {
+        "processing_status": "processed",
+        "match_status": "matching",
+        "reason": "identifier_match",
+        "match": {
+          "title": "Synthetic work match",
+          "authors": "Alice Example",
+          "year": "2024",
+          "doi": "10.1234/match",
+          "source": "Fixture registry",
+          "source_ref": "fixture:match",
+          "years": []
+        },
+        "sources": [
+          {
+            "source": "Fixture registry",
+            "http_status": 200,
+            "error": "",
+            "retry_after": null,
+            "evidence_refs": []
+          }
+        ],
+        "differences": []
+      }
+    },
+    {
+      "citation": "[title-conflict] Original synthetic citation",
+      "claims": {
+        "title": "Unrelated submitted title",
+        "doi": "10.1234/title-conflict",
+        "authors": "Alice Example"
+      },
+      "original": {
+        "citation": "[title-conflict] Original synthetic citation",
+        "claims": {
+          "title": "Unrelated submitted title",
+          "doi": "10.1234/title-conflict",
+          "authors": "Alice Example"
+        }
+      },
+      "positions": [
+        {
+          "record_index": 1
+        }
+      ],
+      "parse_status": "supplied",
+      "uncertain_fields": [],
+      "record_index": 1,
+      "record_id": "5444c506627e9034eea34409e6364c89ac9f9590aaa4f388f95a585eb6d22f03",
+      "claims_sha256": "15f7432d25bb81c039c1e1014a0569fde37008e7aef4b0ba1ab195f290190649",
+      "source_sha256": "593941444bdae06e02c0d128b165ea80df7072647e906fe0a1f4c6df7a2600e1",
+      "parser_version": "bibliography-fallback/3",
+      "evidence": {
+        "processing_status": "processed",
+        "match_status": "conflict",
+        "reason": "identifier_title_conflict",
+        "match": {
+          "title": "Synthetic work title-conflict",
+          "authors": "Alice Example",
+          "year": "2024",
+          "doi": "10.1234/title-conflict",
+          "source": "Fixture registry",
+          "source_ref": "fixture:title-conflict",
+          "years": []
+        },
+        "sources": [
+          {
+            "source": "Fixture registry",
+            "http_status": 200,
+            "error": "",
+            "retry_after": null,
+            "evidence_refs": []
+          }
+        ],
+        "differences": [
+          {
+            "status": "conflicting",
+            "submitted": "Unrelated submitted title",
+            "registered": "Synthetic work title-conflict",
+            "reason": "different_title",
+            "input_certainty": "submitted",
+            "comparison_status": "conflicting",
+            "field": "title"
+          }
+        ]
+      }
+    },
+    {
+      "citation": "[no-match] Original synthetic citation",
+      "claims": {
+        "title": "Synthetic work no-match",
+        "doi": "",
+        "authors": "Alice Example"
+      },
+      "original": {
+        "citation": "[no-match] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work no-match",
+          "doi": "",
+          "authors": "Alice Example"
+        }
+      },
+      "positions": [
+        {
+          "record_index": 2
+        }
+      ],
+      "parse_status": "supplied",
+      "uncertain_fields": [],
+      "record_index": 2,
+      "record_id": "2925ecbab0b2ea38ffa2f7ad3b761b9ccaf35c3dd72abc91af8f208a2865f8d6",
+      "claims_sha256": "8f7bdfda009e5bc83917c65adcc1f680f79fcf410ecd711818740922727334c4",
+      "source_sha256": "593941444bdae06e02c0d128b165ea80df7072647e906fe0a1f4c6df7a2600e1",
+      "parser_version": "bibliography-fallback/3",
+      "evidence": {
+        "processing_status": "processed",
+        "match_status": "unconfirmed",
+        "reason": "no_sufficient_match",
+        "match": null,
+        "sources": [
+          {
+            "source": "Fixture Search",
+            "http_status": 200,
+            "error": "",
+            "retry_after": null,
+            "evidence_refs": []
+          }
+        ],
+        "differences": []
+      }
+    },
+    {
+      "citation": "[missing] Original synthetic citation",
+      "claims": {
+        "title": "Synthetic work missing",
+        "doi": "10.1234/missing",
+        "authors": "Alice Example"
+      },
+      "original": {
+        "citation": "[missing] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work missing",
+          "doi": "10.1234/missing",
+          "authors": "Alice Example"
+        }
+      },
+      "positions": [
+        {
+          "record_index": 3
+        }
+      ],
+      "parse_status": "supplied",
+      "uncertain_fields": [],
+      "record_index": 3,
+      "record_id": "0753144a0011bbef7a06810865e7ce4b1ca1d92b2ecd86fda8517ff45f19366c",
+      "claims_sha256": "7d89f449eef76d17e01f5a456a8af31f3ccb7a880b02c88016a62ec3908ae216",
+      "source_sha256": "593941444bdae06e02c0d128b165ea80df7072647e906fe0a1f4c6df7a2600e1",
+      "parser_version": "bibliography-fallback/3",
+      "evidence": {
+        "processing_status": "processed",
+        "match_status": "unconfirmed",
+        "reason": "not_found",
+        "match": null,
+        "sources": [
+          {
+            "source": "Fixture registry",
+            "http_status": 404,
+            "error": "",
+            "retry_after": null,
+            "evidence_refs": []
+          }
+        ],
+        "differences": []
+      }
+    }
+  ],
+  "batch_processing_status": "complete",
+  "all_entries_processed": true,
+  "stop_reason": "",
+  "coverage": {
+    "requested": 4,
+    "actual": 4,
+    "gap": 0
+  },
+  "budget": {
+    "limit": 20,
+    "reserved": 4,
+    "dispatched": 4
+  }
+}

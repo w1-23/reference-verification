@@ -1,0 +1,251 @@
+{
+  "schema_version": "reference-verification/1",
+  "inventory": {
+    "source": {
+      "name": "references.txt",
+      "sha256": "cc39b4886e028e81a8eff8f6d961c0ed883da3ed5ed1f8e530d1537c2cb7bee9",
+      "version": "cc39b4886e028e81a8eff8f6d961c0ed883da3ed5ed1f8e530d1537c2cb7bee9",
+      "ref": {}
+    },
+    "parser_version": "bibliography-fallback/3",
+    "extraction": {
+      "status": "complete",
+      "scope": "supplied_records",
+      "limitations": [],
+      "records": 3
+    },
+    "entries": [
+      {
+        "citation": "[partial-match] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work partial-match",
+          "doi": "10.1234/partial-match",
+          "authors": "Alice Example"
+        },
+        "original": {
+          "citation": "[partial-match] Original synthetic citation",
+          "claims": {
+            "title": "Synthetic work partial-match",
+            "doi": "10.1234/partial-match",
+            "authors": "Alice Example"
+          }
+        },
+        "positions": [
+          {
+            "record_index": 0
+          }
+        ],
+        "parse_status": "supplied",
+        "uncertain_fields": [],
+        "record_index": 0,
+        "record_id": "aa49e3e3f900c8092934e3fc70bb4962ffbac741f47c00ea3549480fd39f5ce9",
+        "claims_sha256": "ffeb9fc96e2589842b89565ba609760abb90d4e5993625bbbe7bec555b648e88",
+        "source_sha256": "cc39b4886e028e81a8eff8f6d961c0ed883da3ed5ed1f8e530d1537c2cb7bee9",
+        "parser_version": "bibliography-fallback/3"
+      },
+      {
+        "citation": "[partial-rate] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work partial-rate",
+          "doi": "10.1234/partial-rate",
+          "authors": "Alice Example"
+        },
+        "original": {
+          "citation": "[partial-rate] Original synthetic citation",
+          "claims": {
+            "title": "Synthetic work partial-rate",
+            "doi": "10.1234/partial-rate",
+            "authors": "Alice Example"
+          }
+        },
+        "positions": [
+          {
+            "record_index": 1
+          }
+        ],
+        "parse_status": "supplied",
+        "uncertain_fields": [],
+        "record_index": 1,
+        "record_id": "212f1d9599ca637a191855a7d26f352930a070eb2121309e7efba5cbe9135f6f",
+        "claims_sha256": "35d89d9bee0c9392404d07a205543fb95f4c83c9fab66f1f3b42d76ef11fb383",
+        "source_sha256": "cc39b4886e028e81a8eff8f6d961c0ed883da3ed5ed1f8e530d1537c2cb7bee9",
+        "parser_version": "bibliography-fallback/3"
+      },
+      {
+        "citation": "[partial-skipped] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work partial-skipped",
+          "doi": "10.1234/partial-skipped",
+          "authors": "Alice Example"
+        },
+        "original": {
+          "citation": "[partial-skipped] Original synthetic citation",
+          "claims": {
+            "title": "Synthetic work partial-skipped",
+            "doi": "10.1234/partial-skipped",
+            "authors": "Alice Example"
+          }
+        },
+        "positions": [
+          {
+            "record_index": 2
+          }
+        ],
+        "parse_status": "supplied",
+        "uncertain_fields": [],
+        "record_index": 2,
+        "record_id": "9ecccb21850db5e587ad5eefd8d620b3cf0f2cbab9c8a8a0648419a6a67040be",
+        "claims_sha256": "ca87081ce622e2b868a755bdf968adb206bc07adc6f697c6044be829ece74726",
+        "source_sha256": "cc39b4886e028e81a8eff8f6d961c0ed883da3ed5ed1f8e530d1537c2cb7bee9",
+        "parser_version": "bibliography-fallback/3"
+      }
+    ]
+  },
+  "entries": [
+    {
+      "citation": "[partial-match] Original synthetic citation",
+      "claims": {
+        "title": "Synthetic work partial-match",
+        "doi": "10.1234/partial-match",
+        "authors": "Alice Example"
+      },
+      "original": {
+        "citation": "[partial-match] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work partial-match",
+          "doi": "10.1234/partial-match",
+          "authors": "Alice Example"
+        }
+      },
+      "positions": [
+        {
+          "record_index": 0
+        }
+      ],
+      "parse_status": "supplied",
+      "uncertain_fields": [],
+      "record_index": 0,
+      "record_id": "aa49e3e3f900c8092934e3fc70bb4962ffbac741f47c00ea3549480fd39f5ce9",
+      "claims_sha256": "ffeb9fc96e2589842b89565ba609760abb90d4e5993625bbbe7bec555b648e88",
+      "source_sha256": "cc39b4886e028e81a8eff8f6d961c0ed883da3ed5ed1f8e530d1537c2cb7bee9",
+      "parser_version": "bibliography-fallback/3",
+      "evidence": {
+        "processing_status": "processed",
+        "match_status": "matching",
+        "reason": "identifier_match",
+        "match": {
+          "title": "Synthetic work partial-match",
+          "authors": "Alice Example",
+          "year": "2024",
+          "doi": "10.1234/partial-match",
+          "source": "Fixture registry",
+          "source_ref": "fixture:partial-match",
+          "years": []
+        },
+        "sources": [
+          {
+            "source": "Fixture registry",
+            "http_status": 200,
+            "error": "",
+            "retry_after": null,
+            "evidence_refs": []
+          }
+        ],
+        "differences": []
+      }
+    },
+    {
+      "citation": "[partial-rate] Original synthetic citation",
+      "claims": {
+        "title": "Synthetic work partial-rate",
+        "doi": "10.1234/partial-rate",
+        "authors": "Alice Example"
+      },
+      "original": {
+        "citation": "[partial-rate] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work partial-rate",
+          "doi": "10.1234/partial-rate",
+          "authors": "Alice Example"
+        }
+      },
+      "positions": [
+        {
+          "record_index": 1
+        }
+      ],
+      "parse_status": "supplied",
+      "uncertain_fields": [],
+      "record_index": 1,
+      "record_id": "212f1d9599ca637a191855a7d26f352930a070eb2121309e7efba5cbe9135f6f",
+      "claims_sha256": "35d89d9bee0c9392404d07a205543fb95f4c83c9fab66f1f3b42d76ef11fb383",
+      "source_sha256": "cc39b4886e028e81a8eff8f6d961c0ed883da3ed5ed1f8e530d1537c2cb7bee9",
+      "parser_version": "bibliography-fallback/3",
+      "evidence": {
+        "processing_status": "processed",
+        "match_status": "unconfirmed",
+        "reason": "rate_limited",
+        "match": null,
+        "sources": [
+          {
+            "source": "Fixture registry",
+            "http_status": 429,
+            "error": "http_429",
+            "retry_after": 60,
+            "evidence_refs": []
+          }
+        ],
+        "differences": []
+      }
+    },
+    {
+      "citation": "[partial-skipped] Original synthetic citation",
+      "claims": {
+        "title": "Synthetic work partial-skipped",
+        "doi": "10.1234/partial-skipped",
+        "authors": "Alice Example"
+      },
+      "original": {
+        "citation": "[partial-skipped] Original synthetic citation",
+        "claims": {
+          "title": "Synthetic work partial-skipped",
+          "doi": "10.1234/partial-skipped",
+          "authors": "Alice Example"
+        }
+      },
+      "positions": [
+        {
+          "record_index": 2
+        }
+      ],
+      "parse_status": "supplied",
+      "uncertain_fields": [],
+      "record_index": 2,
+      "record_id": "9ecccb21850db5e587ad5eefd8d620b3cf0f2cbab9c8a8a0648419a6a67040be",
+      "claims_sha256": "ca87081ce622e2b868a755bdf968adb206bc07adc6f697c6044be829ece74726",
+      "source_sha256": "cc39b4886e028e81a8eff8f6d961c0ed883da3ed5ed1f8e530d1537c2cb7bee9",
+      "parser_version": "bibliography-fallback/3",
+      "evidence": {
+        "processing_status": "unprocessed",
+        "match_status": "unprocessed",
+        "reason": "rate_limit_cooldown",
+        "match": null,
+        "sources": [],
+        "differences": []
+      }
+    }
+  ],
+  "batch_processing_status": "partial",
+  "all_entries_processed": false,
+  "stop_reason": "",
+  "coverage": {
+    "requested": 3,
+    "actual": 2,
+    "gap": 1
+  },
+  "budget": {
+    "limit": 2,
+    "reserved": 2,
+    "dispatched": 2
+  }
+}
